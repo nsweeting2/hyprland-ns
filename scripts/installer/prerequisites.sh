@@ -37,8 +37,6 @@ run_command "pacman -S --noconfirm kitty ghostty" "Install Kitty & Ghostty - Ter
 
 run_command "pacman -S --noconfirm nano" "Install Nano and Neovim - Text Editors" "yes"
 
-run_command "yay -S --sudoloop --noconfirm visual-studio-code-bin" "Install Visual Studio Code" "yes" "no"
-
-run_command "pacman -S --noconfirm tar" "Install tar for extracting files (Must)/needed for copying themes" "yes"
+run_command "pacman -S --noconfirm tar 7zip" "Install tar and 7zip for extracting files (Must)/needed for copying themes" "yes"
 
 echo "------------------------------------------------------------------------"

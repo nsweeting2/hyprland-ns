@@ -34,6 +34,6 @@ run_command "cp -r $BASE_DIR/configs/wlogout /home/$SUDO_USER/.config/ && cp -r 
 run_command "yay -S --sudoloop --noconfirm hypridle" "Install Hypridle for idle management (Must)" "yes" "no"
 run_command "cp -r $BASE_DIR/configs/hypr/hypridle.conf /home/$SUDO_USER/.config/hypr/" "Copy Hypridle config" "yes"
 
-run_command "pacman -S --noconfirm pcmanfm-gtk3" "Install PCManFM - File Manager" "yes"
+run_command "yay -S --sudoloop --noconfirm pcmanfm-gtk3" "Install PCManFM - File Manager" "yes" "no"
 
 echo "------------------------------------------------------------------------"
