@@ -35,6 +35,9 @@ run_command "cp -r $BASE_DIR/configs/wlogout /home/$SUDO_USER/.config/ && cp -r 
 run_command "yay -S --sudoloop --noconfirm hypridle" "Install Hypridle for idle management (Must)" "yes" "no"
 run_command "cp -r $BASE_DIR/configs/hypr/hypridle.conf /home/$SUDO_USER/.config/hypr/" "Copy Hypridle config" "yes" "no"
 
+# Install UWSM - Universal Wayland Session Manager becase Hypr recomends running Hyprland through it.
+run_command "pacman -S --noconfirm uwsm" "Install Universal Wayland Session Manager" "yes" "no"
+
 run_command "pacman -S --noconfirm pcmanfm-gtk3" "Install PCManFM - File Manager" "yes" "no"
 
 echo "------------------------------------------------------------------------"
