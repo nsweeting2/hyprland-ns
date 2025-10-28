@@ -15,10 +15,16 @@ run_command "mkdir -p /home/$SUDO_USER/.config/hypr/ && cp -r $BASE_DIR/configs/
 
 run_command "pacman -S --noconfirm xdg-desktop-portal-hyprland" "Install XDG desktop portal for Hyprland" "yes"
 
-run_command "pacman -S --noconfirm polkit-kde-agent" "Install KDE Polkit agent for authentication dialogs" "yes"
+# run_command "pacman -S --noconfirm polkit-kde-agent" "Install KDE Polkit agent for authentication dialogs" "yes"
+# I want to stick to the hypr ecosystem - nsweeting2
+run_command "pacman -S --noconfirm hyprpolkitagent" "Install Hypr Polkit Agent for authentication dialogs" "yes"
 
-run_command "pacman -S --noconfirm dunst" "Install Dunst notification daemon" "yes"
-run_command "cp -r $BASE_DIR/configs/dunst /home/$SUDO_USER/.config/" "Copy dunst config" "yes" "no"
+# run_command "pacman -S --noconfirm dunst" "Install Dunst notification daemon" "yes"
+# going to run Mako because its Wayland native - nsweeting2
+run_command "pacman -S --noconfirm mako" "Install Mako notification daemon" "yes"
+
+# run_command "cp -r $BASE_DIR/configs/dunst /home/$SUDO_USER/.config/" "Copy dunst config" "yes" "no"
+run_command "cp -r $BASE_DIR/configs/mako /home/$SUDO_USER/.config/" "Copy mako config" "yes" "no"
 
 run_command "pacman -S --noconfirm qt5-wayland qt6-wayland" "Install QT support on wayland" "yes"
 

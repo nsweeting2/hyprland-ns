@@ -15,10 +15,11 @@ run_command "cp -r $BASE_DIR/configs/waybar /home/$SUDO_USER/.config/" "Copy Way
 run_command "yay -S --sudoloop --noconfirm tofi" "Install Tofi - Application Launcher" "yes" "no"
 run_command "cp -r $BASE_DIR/configs/tofi /home/$SUDO_USER/.config/" "Copy Tofi config(s)" "yes" "no"
 
-run_command "pacman -S --noconfirm cliphist" "Install Cliphist - Clipboard Manager" "yes"
+# I am unsure about Cliphist right now - nsweeting2
+# run_command "pacman -S --noconfirm cliphist" "Install Cliphist - Clipboard Manager" "yes"
 
-run_command "yay -S --sudoloop --noconfirm swww" "Install SWWW for wallpaper management" "yes" "no"
-run_command "mkdir -p /home/$SUDO_USER/.config/assets/backgrounds && cp -r $BASE_DIR/assets/backgrounds /home/$SUDO_USER/.config/assets/" "Copy sample wallpapers to assets directory (Recommended)" "yes" "no"
+# run_command "yay -S --sudoloop --noconfirm swww" "Install SWWW for wallpaper management" "yes" "no"
+# run_command "mkdir -p /home/$SUDO_USER/.config/assets/backgrounds && cp -r $BASE_DIR/assets/backgrounds /home/$SUDO_USER/.config/assets/" "Copy sample wallpapers to assets directory (Recommended)" "yes" "no"
 
 run_command "yay -S --sudoloop --noconfirm hyprpicker" "Install Hyprpicker - Color Picker" "yes" "no"
 
@@ -28,9 +29,12 @@ run_command "cp -r $BASE_DIR/configs/hypr/hyprlock.conf /home/$SUDO_USER/.config
 run_command "yay -S --sudoloop --noconfirm wlogout" "Install Wlogout - Session Manager" "yes" "no"
 run_command "cp -r $BASE_DIR/configs/wlogout /home/$SUDO_USER/.config/ && cp -r $BASE_DIR/assets/wlogout /home/$SUDO_USER/.config/assets/" "Copy Wlogout config and assets" "yes" "no"
 
-run_command "yay -S --sudoloop --noconfirm grimblast" "Install Grimblast - Screenshot tool" "yes" "no"
+# I am unsure about Grimblast right now - nsweeting2
+# run_command "yay -S --sudoloop --noconfirm grimblast" "Install Grimblast - Screenshot tool" "yes" "no"
 
 run_command "yay -S --sudoloop --noconfirm hypridle" "Install Hypridle for idle management (Must)" "yes" "no"
 run_command "cp -r $BASE_DIR/configs/hypr/hypridle.conf /home/$SUDO_USER/.config/hypr/" "Copy Hypridle config" "yes" "no"
+
+run_command "pacman -S --noconfirm pcmanfm-gtk3" "Install PCManFM - File Manager" "yes" "no"
 
 echo "------------------------------------------------------------------------"

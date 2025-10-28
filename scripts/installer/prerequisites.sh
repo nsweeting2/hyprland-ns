@@ -23,11 +23,20 @@ run_command "pacman -S --noconfirm ttf-cascadia-code-nerd ttf-cascadia-mono-nerd
 
 run_command "pacman -S --noconfirm sddm && systemctl enable sddm.service" "Install and enable SDDM (Recommended)" "yes"
 
-run_command "yay -S --sudoloop --noconfirm brave-bin" "Install Brave Browser" "yes" "no" 
+run_command "yay -S --sudoloop --noconfirm brave-bin" "Install Brave Browser" "yes" "no"
 
 run_command "pacman -S --noconfirm kitty" "Install Kitty (Recommended)" "yes"
 
+# Added in Ghostty becase I like it - nsweeting2
+run_command "pacman -S --noconfirm ghostty" "Install Ghostty" "yes"
+
 run_command "pacman -S --noconfirm nano" "Install nano" "yes"
+
+# Added neovim because I want to get use to using it - nsweeting2
+run_command "pacman -S --noconfirm neovim" "Neovim" "yes"
+
+# Added VS Code installation - nsweeting2
+run_command "yay -S --sudoloop --noconfirm visual-studio-code-bin" "Install Visual Studio Code" "yes" "no"
 
 run_command "pacman -S --noconfirm tar" "Install tar for extracting files (Must)/needed for copying themes" "yes"
 

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# I am leaving this theming section intact until I decide on a new theming setup. - nsweeting2
+
 # Get the directory of the current script
 BASE_DIR=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
 
