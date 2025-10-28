@@ -17,7 +17,7 @@ if command -v yay > /dev/null; then
 elif run_command "pacman -S --noconfirm --needed git base-devel" "Install YAY (Must)/Breaks the script" "yes"; then # 
     run_command "git clone https://aur.archlinux.org/yay.git && cd yay" "Clone YAY (Must)/Breaks the script" "no" "no" 
     run_command "makepkg --noconfirm -si && cd .. # builds with makepkg" "Build YAY (Must)/Breaks the script" "no" "no" 
-fis
+fi
 
 run_command "pacman -S --noconfirm iwd" "Install IWD for Wi-Fi management (Recommended)" "yes"
 

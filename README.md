@@ -13,4 +13,4 @@ Welcome to the Simple Hyprland Guide! This repository is designed to help nsweet
     ```
 3. Run the installation script with sudo:
     ```
-    sudo sh install.shs
+    sudo sh install.sh
