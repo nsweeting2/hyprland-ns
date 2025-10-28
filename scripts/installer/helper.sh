@@ -44,7 +44,7 @@ function print_info {
 }
 
 function print_bold_blue {
-    echo -e "${BLUE}${BOLD}$1${NC}"
+    echo -e "${NC}${BOLD}$1${NC}"
 }
 
 # Function to ask for confirmation

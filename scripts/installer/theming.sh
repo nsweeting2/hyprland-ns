@@ -10,6 +10,7 @@ source $BASE_DIR/scripts/installer/helper.sh
 
 log_message "Installation started for theming section"
 print_info "\nStarting theming setup..."
+echo "------------------------------------------------------------------------"
 
 run_command "pacman -S --noconfirm nwg-look" "Install nwg-look for GTK theme management" "yes" 
 

@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # Starting here I am modifying this process for myself. - nsweeting2
+# Original author: gaurav23b
+# Modified By: nsweeting2 for nsweeting2
 
 # Get the directory of the current script
 BASE_DIR=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
@@ -14,7 +16,7 @@ trap 'trap_message' INT TERM
 # Script start
 log_message "Installation started"
 print_bold_blue "\nSimple Hyprland - nsweeting2 Edition Installer\n"
-echo "---------------"
+echo "------------------------------------------------------------------------"
 
 # Check if running as root
 check_root
@@ -29,5 +31,6 @@ run_script "utilities.sh" "Basic Utilities & Configs Setup"
 run_script "theming.sh" "Themes and Tools Setup"
 run_script "final.sh" "Final Setup"
 
-print_bold_blue "\n🌟 Setup Complete\n"
 log_message "Installation completed successfully"
+print_bold_blue "\n🌟 Setup Complete\n"
+echo "------------------------------------------------------------------------"

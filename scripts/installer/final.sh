@@ -8,6 +8,7 @@ source $BASE_DIR/scripts/installer/helper.sh
 
 log_message "Final setup script started"
 print_bold_blue "\nCongratulations! Your Simple Hyprland setup is complete!"
+echo "------------------------------------------------------------------------"
 
 # print_bold_blue "\nRepository Information:"
 # echo "   - GitHub Repository: https://github.com/gaurav23b/simple-hyprland"
