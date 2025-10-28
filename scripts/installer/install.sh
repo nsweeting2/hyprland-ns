@@ -7,6 +7,24 @@
 # Get the directory of the current script
 BASE_DIR=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
 
+# Parse arguments (support --auto to run non-interactively)
+AUTO_MODE="no"
+while [[ $# -gt 0 ]]; do
+	case "$1" in
+		--auto)
+			AUTO_MODE="yes"
+			shift
+			;;
+		*)
+			# Unknown option - pass through or ignore
+			shift
+			;;
+	esac
+done
+
+# Export AUTO_MODE so sourced helper functions can read it
+export AUTO_MODE
+
 # Source helper file
 source $BASE_DIR/scripts/installer/helper.sh
 

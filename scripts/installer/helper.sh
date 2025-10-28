@@ -14,6 +14,10 @@ BASE_DIR=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
 # Log file
 LOG_FILE="$BASE_DIR/scripts/installer/simple_hyprland_install.log"
 
+# AUTO_MODE can be set by the top-level installer (install.sh) using --auto.
+# Default to "no" when not set.
+AUTO_MODE="${AUTO_MODE:-no}"
+
 function trap_message {
     print_error "\n\nScript interrupted. Exiting.....\n"
     # Add any cleanup code here
@@ -49,6 +53,12 @@ function print_bold_blue {
 
 # Function to ask for confirmation
 function ask_confirmation {
+    # If AUTO_MODE is enabled, automatically accept prompts.
+    if [[ "${AUTO_MODE,,}" == "yes" ]]; then
+        log_message "Auto mode: automatically accepting prompt: $1"
+        return 0
+    fi
+
     while true; do
         read -p "$(print_warning "$1 (y/n): ")" -n 1 -r
         echo
@@ -71,6 +81,13 @@ function run_command {
     local description="$2"
     local ask_confirm="${3:-yes}"  # Default to asking for confirmation
     local use_sudo="${4:-yes}"     # Default to using sudo
+
+    # If AUTO_MODE is enabled, do not prompt for confirmation and do not enter
+    # interactive retry loops that expect user input. Force non-interactive
+    # behavior by treating ask_confirm as "no".
+    if [[ "${AUTO_MODE,,}" == "yes" ]]; then
+        ask_confirm="no"
+    fi
 
     local full_cmd=""
     if [[ "$use_sudo" == "no" ]]; then
@@ -116,6 +133,19 @@ function run_command {
 function run_script {
     local script="$BASE_DIR/scripts/installer/$1"
     local description="$2"
+    # In AUTO_MODE, run once without prompting and do not retry interactively.
+    if [[ "${AUTO_MODE,,}" == "yes" ]]; then
+        log_message "Auto mode: executing script $script without prompts"
+        if bash "$script"; then
+            print_success "\n$description completed successfully."
+            return 0
+        else
+            print_error "$description script failed (auto mode)."
+            log_message "$description failed in auto mode"
+            return 1
+        fi
+    fi
+
     if ask_confirmation "\nExecute '$description' script"; then
         while ! bash "$script"; do
             print_error "$description script failed."
