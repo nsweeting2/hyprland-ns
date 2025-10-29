@@ -30,11 +30,15 @@ run_command "yay -S --sudoloop --noconfirm jvol-git" "Install Jvol for audio con
 #I want a TUI or sorts for brightness control....
 run_command "pacman -S --noconfirm brightnessctl" "Install brightnessctl for backlight control" "yes"
 
+#I want a TUI or sorts for system font control...
 run_command "pacman -S --noconfirm ttf-cascadia-code-nerd ttf-cascadia-mono-nerd ttf-fira-code ttf-fira-mono ttf-fira-sans ttf-firacode-nerd ttf-iosevka-nerd ttf-iosevkaterm-nerd ttf-jetbrains-mono-nerd ttf-jetbrains-mono ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono" "Installing Nerd Fonts and Symbols (Recommended)" "yes" 
 
+#I am going to try to land at tty from boot and running hyprland from the bashprofile instead.
 #run_command "pacman -S --noconfirm sddm && systemctl enable sddm.service" "Install and enable SDDM" "yes"
 
 run_command "yay -S --sudoloop --noconfirm brave-bin" "Install Brave Browser" "yes" "no"
+
+run_command "pacman -S --noconfirm firefox" "Install Firefox Browser" "yes"
 
 run_command "pacman -S --noconfirm kitty ghostty" "Install Kitty & Ghostty - Terminal Emulators" "yes"
 
