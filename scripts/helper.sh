@@ -200,7 +200,7 @@ function run_with_temp_nopass_as_user {
 
 # Function to run a script with retry and confirmation
 function run_script {
-    local script="$BASE_DIR/scripts/installer/$1"
+    local script="$BASE_DIR/scripts/$1"
     local description="$2"
     # In AUTO_MODE, run once without prompting and do not retry interactively.
     if [[ "${AUTO_MODE,,}" == "yes" ]]; then
