@@ -12,7 +12,7 @@ NC='\033[0m' # No Color
 BASE_DIR=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
 
 # Log file
-LOG_FILE="$BASE_DIR/scripts/installer/simple_hyprland_install.log"
+LOG_FILE="$BASE_DIR/scripts/simple_hyprland_install.log"
 
 # AUTO_MODE can be set by the top-level installer (install.sh) using
 # --manual/--auto. Default to automatic (yes) unless --manual is passed.

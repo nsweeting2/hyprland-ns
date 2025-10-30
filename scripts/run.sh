@@ -33,7 +33,7 @@ done
 export AUTO_MODE
 
 # Source helper file
-source $BASE_DIR/scripts/installer/helper.sh
+source $BASE_DIR/scripts/helper.sh
 
 # Trap for unexpected exits
 trap 'trap_message' INT TERM
