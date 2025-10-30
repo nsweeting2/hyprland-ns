@@ -89,6 +89,17 @@ function run_command {
         ask_confirm="no"
     fi
 
+    # If this looks like an AUR helper invocation (yay, paru, etc.) and we're
+    # in AUTO_MODE, run it as the original user with a temporary sudoers
+    # entry that allows pacman/makepkg (and yay) without a password. This
+    # avoids interactive sudo password prompts from AUR helpers.
+    if [[ "${AUTO_MODE,,}" == "yes" ]] && ([[ "$cmd" == *"yay"* || "$cmd" == *"paru"* ]]); then
+        # Use the helper to run the command as the user with temporary NOPASSWD
+        log_message "Auto mode: running AUR helper command via temporary NOPASSWD sudoers: $cmd"
+        run_with_temp_nopass_as_user "$cmd"
+        return $?
+    fi
+
     local full_cmd=""
     if [[ "$use_sudo" == "no" ]]; then
         full_cmd="sudo -u $SUDO_USER $cmd"
@@ -127,6 +138,59 @@ function run_command {
     print_success "$description completed successfully."
     log_message "$description completed successfully."
     return 0
+}
+
+
+# Create a temporary sudoers file allowing the installer user to run the
+# minimal commands needed for AUR builds without being prompted for a
+# password. The file is validated with visudo before being left in place.
+function enable_nopass_sudo_for_installer {
+    local u="${SUDO_USER:-$(logname)}"
+    local f="/etc/sudoers.d/simple-hyprland"
+    if [[ -z "$u" ]]; then
+        log_message "enable_nopass_sudo_for_installer: SUDO_USER not set"
+        return 1
+    fi
+
+    # Limit commands to known package tools
+    printf "%s ALL=(ALL) NOPASSWD: /usr/bin/pacman, /usr/bin/makepkg, /usr/bin/yay\n" "$u" > "$f"
+    chmod 440 "$f"
+    if ! visudo -cf "$f" >/dev/null 2>&1; then
+        print_error "Failed to validate temporary sudoers file. Aborting."
+        rm -f "$f"
+        log_message "Failed to create sudoers file $f"
+        return 1
+    fi
+    log_message "Temporary sudoers file created at $f for user $u"
+    return 0
+}
+
+function disable_nopass_sudo_for_installer {
+    local f="/etc/sudoers.d/simple-hyprland"
+    if [[ -f "$f" ]]; then
+        rm -f "$f"
+        log_message "Temporary sudoers file $f removed"
+    fi
+    return 0
+}
+
+# Run a command as the original (non-root) user while temporarily enabling
+# NOPASSWD sudo for pacman/makepkg/yay. This is intended for non-interactive
+# installer AUR steps.
+function run_with_temp_nopass_as_user {
+    local cmd="$*"
+    if ! enable_nopass_sudo_for_installer; then
+        print_error "Could not enable temporary sudoers; aborting AUR command."
+        return 1
+    fi
+
+    # Run the command as the original user
+    sudo -u "${SUDO_USER:-$(logname)}" bash -c "$cmd"
+    local rc=$?
+
+    # Remove sudoers entry immediately
+    disable_nopass_sudo_for_installer
+    return $rc
 }
 
 # Function to run a script with retry and confirmation
