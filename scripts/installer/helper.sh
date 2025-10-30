@@ -14,10 +14,11 @@ BASE_DIR=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
 # Log file
 LOG_FILE="$BASE_DIR/scripts/installer/simple_hyprland_install.log"
 
-# AUTO_MODE can be set by the top-level installer (install.sh) using --auto.
-# Default to "no" when not set.
-AUTO_MODE="${AUTO_MODE:-no}"
+# AUTO_MODE can be set by the top-level installer (install.sh) using
+# --manual/--auto. Default to automatic (yes) unless --manual is passed.
+AUTO_MODE="${AUTO_MODE:-yes}"
 
+# Function to handle script interruptions
 function trap_message {
     print_error "\n\nScript interrupted. Exiting.....\n"
     # Add any cleanup code here
@@ -35,18 +36,21 @@ function print_error {
     echo -e "${RED}$1${NC}"
 }
 
+# Function for SUCCESS messages
 function print_success {
     echo -e "${GREEN}$1${NC}"
 }
 
+# Function for WARNING messages
 function print_warning {
     echo -e "${YELLOW}$1${NC}"
 }
-
+# Function for INFO messages
 function print_info {
     echo -e "${BLUE}$1${NC}"
 }
-
+# Function for Colored messages
+# I hate the folow used so i set it to NC for now
 function print_bold_blue {
     echo -e "${NC}${BOLD}$1${NC}"
 }
@@ -141,9 +145,9 @@ function run_command {
 }
 
 
-# Create a temporary sudoers file allowing the installer user to run the
-# minimal commands needed for AUR builds without being prompted for a
-# password. The file is validated with visudo before being left in place.
+# Function to create a temporary sudoers file allowing the installer user 
+# to run the minimal commands needed for AUR builds without being prompted
+# for a password. The file is validated with visudo before being left in place.
 function enable_nopass_sudo_for_installer {
     local u="${SUDO_USER:-$(logname)}"
     local f="/etc/sudoers.d/simple-hyprland"
@@ -165,6 +169,7 @@ function enable_nopass_sudo_for_installer {
     return 0
 }
 
+# Function to remove the temporary sudoers file
 function disable_nopass_sudo_for_installer {
     local f="/etc/sudoers.d/simple-hyprland"
     if [[ -f "$f" ]]; then
@@ -223,6 +228,7 @@ function run_script {
     fi
 }
 
+# Function to check if running as root
 function check_root {
     if [ "$EUID" -ne 0 ]; then
         print_error "Please run as root"
@@ -235,6 +241,7 @@ function check_root {
     log_message "Original user is $SUDO_USER"
 }
 
+# Function to check if the OS is Arch Linux
 function check_os {
     if [ -f /etc/os-release ]; then
         . /etc/os-release
@@ -254,5 +261,87 @@ function check_os {
             log_message "Installation cancelled due to unknown OS"
             exit 1
         fi
+    fi
+}
+
+# Function to verify the system looks like it was prepared by archinstall
+function check_archinstall {
+    log_message "Running archinstall pre-checks (package presence + freshness)"
+
+    # Packages to verify
+    local pkgs=(hyprland dunst kitty uwsm dolphin wofi xdg-desktop-portal-hyprland qt5-wayland qt6-wayland polkit-kde-agent grim slurp)
+    local missing=()
+    for p in "${pkgs[@]}"; do
+        if ! pacman -Qi "$p" >/dev/null 2>&1; then
+            missing+=("$p")
+        fi
+    done
+
+    if (( ${#missing[@]} == 0 )); then
+        print_success "All required packages are installed."
+        log_message "check_archinstall: all required packages present"
+    else
+        print_warning "Missing packages: ${missing[*]}"
+        log_message "check_archinstall: missing packages: ${missing[*]}"
+    fi
+
+    # Freshness heuristic: consider system fresh if the first pacman log entry is
+    # within the last 3 days OR total installed package count is <= 250.
+    local fresh=1
+    if [[ -f /var/log/pacman.log ]]; then
+        # pacman.log lines begin with an ISO timestamp like 2025-10-30T12:34:56
+        local first_ts_str
+        first_ts_str=$(awk 'NR==1{print $1}' /var/log/pacman.log 2>/dev/null || true)
+        if [[ -n "$first_ts_str" ]]; then
+            # Try to convert the timestamp to epoch seconds; tolerate failures
+            local first_epoch
+            first_epoch=$(date -d "$first_ts_str" +%s 2>/dev/null || true)
+            if [[ -n "$first_epoch" ]]; then
+                local now_epoch
+                now_epoch=$(date +%s)
+                local days=$(( (now_epoch - first_epoch) / 86400 ))
+                log_message "First pacman transaction: $first_ts_str ($days days ago)"
+                    if (( days <= 3 )); then
+                    fresh=0
+                        log_message "check_archinstall: pacman log indicates fresh install (<=3 days)"
+                fi
+            fi
+        fi
+    fi
+
+    # Also consider package count
+    local pkg_count
+    pkg_count=$(pacman -Qq /dev/null | wc -l || echo 0)
+    if [[ -n "$pkg_count" ]] && (( pkg_count <= 500 )); then
+        fresh=0
+        log_message "check_archinstall: package count $pkg_count <= 500 (considered fresh)"
+    else
+        log_message "check_archinstall: package count $pkg_count"
+    fi
+
+    if (( fresh == 0 )); then
+        print_success "System appears fresh enough for this installer."
+    else
+        print_warning "System does not appear fresh (older pacman log and many packages)."
+    fi
+
+    # Decide outcome
+    if (( ${#missing[@]} == 0 )) && (( fresh == 0 )); then
+        log_message "check_archinstall: package and freshness checks passed"
+        return 0
+    fi
+
+    log_message "check_archinstall: pre-checks failed (missing packages or not fresh)"
+    if [[ "${AUTO_MODE,,}" == "yes" ]]; then
+        print_error "AUTO_MODE is enabled and pre-checks failed — aborting."
+        exit 1
+    fi
+
+    if ask_confirmation "Some pre-checks failed (missing packages or system not fresh). Continue anyway?"; then
+        log_message "User chose to continue despite failed pre-checks"
+        return 0
+    else
+        log_message "User chose to abort due to failed pre-checks"
+        exit 1
     fi
 }
