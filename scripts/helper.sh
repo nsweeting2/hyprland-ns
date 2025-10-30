@@ -9,7 +9,7 @@ BOLD='\033[1m'
 NC='\033[0m' # No Color
 
 # Get the directory of the current script
-BASE_DIR=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
+BASE_DIR=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")
 
 # Log file
 LOG_FILE="$BASE_DIR/scripts/simple_hyprland_install.log"

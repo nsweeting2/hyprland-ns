@@ -3,7 +3,7 @@
 # I am leaving this theming section intact until I decide on a new theming setup. - nsweeting2
 
 # Get the directory of the current script
-BASE_DIR=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
+BASE_DIR=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")
 
 # Source helper file
 source $BASE_DIR/scripts/helper.sh
