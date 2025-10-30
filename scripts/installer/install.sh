@@ -2,7 +2,8 @@
 
 # Original author: gaurav23b
 # Modified By: nsweeting2 for nsweeting2
-# Modified to run non interactivly after and archinstall. 
+# Modified to run non interactivly after and archinstall
+# Refactored to make it setup a system as I see fit
 
 # Get the directory of the current script
 BASE_DIR=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
@@ -42,20 +43,11 @@ log_message "Installation started"
 print_bold_blue "\nSimple Hyprland - nsweeting2 Edition Installer\n"
 echo "------------------------------------------------------------------------"
 
-# Check if running as root
-check_root
-
-# Check if OS is Arch Linux
-check_os
-
-# Check if we are configured as we expect from archinstall.
-check_archinstall
-
 # Run child scripts
-run_script "prerequisites.sh" "Prerequisites Setup"
-run_script "hypr.sh" "Hyprland & Critical Softwares Setup"
-run_script "utilities.sh" "Basic Utilities & Configs Setup"
-run_script "theming.sh" "Themes and Tools Setup"
+run_script "pre.sh" "Pre Setup"
+run_script "setup.sh" "Hyprland & Critical Softwares Setup"
+run_script "configure.sh" "Basic Utilities & Configs Setup"
+run_script "theme.sh" "Themes and Tools Setup"
 run_script "final.sh" "Final Setup"
 
 log_message "Installation completed successfully"
