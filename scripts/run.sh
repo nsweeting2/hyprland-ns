@@ -6,7 +6,7 @@
 # Refactored to make it setup a system as I see fit
 
 # Get the directory of the current script
-BASE_DIR=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
+BASE_DIR=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")
 
 # Parse arguments: installer runs non-interactively by default (AUTO_MODE=yes).
 # Pass --manual to enable interactive/manual prompts. Keep --auto for
