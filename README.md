@@ -9,8 +9,8 @@ Welcome to the Simple Hyprland Guide! This repository is designed to help nsweet
     ```
 2. Navigate to the installer directory:
     ```
-    cd ~/simple-hyprland/scripts/installer
+    cd ~/simple-hyprland/scripts/
     ```
-3. Run the installation script with sudo:
+3. Run the script with sudo:
     ```
-    sudo sh install.sh
+    sudo sh run.sh
