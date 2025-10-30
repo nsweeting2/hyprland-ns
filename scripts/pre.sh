@@ -25,7 +25,6 @@ check_archinstall # in helper.sh
 # Remove the extra archinstall packages I don't want.
 run_command "pacman -Rs --noconfirm polkit" "Remove polkit, we will use hyprpolkit" "yes"
 run_command "pacman -Rs --noconfirm dunst" "Remove dunst, we will use mako" "yes"
-run_command "pacman -Rs --noconfirm wofi" "Remove wofi, we will use tofi" "yes"
 run_command "pacman -Rs --noconfirm dolphin" "Remove dolphin, we will use pcmanfm-gtk3" "yes"
 
 # Install Yay if it is not already installed.

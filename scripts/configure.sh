@@ -25,8 +25,8 @@ run_command "cp -r $BASE_DIR/configs/mako /home/$SUDO_USER/.config/" "Copy mako 
 # Waybar
 run_command "cp -r $BASE_DIR/configs/waybar /home/$SUDO_USER/.config/" "Copy Waybar config" "yes"
 
-# Tofi
-run_command "cp -r $BASE_DIR/configs/tofi /home/$SUDO_USER/.config/" "Copy Tofi config(s)" "yes"
+# Wofi
+run_command "cp -r $BASE_DIR/configs/wofi /home/$SUDO_USER/.config/" "Copy Wofi config(s)" "yes"
 
 # wLogout
 run_command "cp -r $BASE_DIR/configs/hypr/hyprlock.conf /home/$SUDO_USER/.config/hypr/" "Copy Hyprlock config" "yes" 

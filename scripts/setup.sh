@@ -13,17 +13,26 @@ echo "------------------------------------------------------------------------"
 
 # Use Pacman and Yay to install software.
 
-# All the Nerd Fonts and Symbols.
-run_command "pacman -S --noconfirm ttf-cascadia-code-nerd ttf-cascadia-mono-nerd ttf-fira-code ttf-fira-mono ttf-fira-sans ttf-firacode-nerd ttf-iosevka-nerd ttf-iosevkaterm-nerd ttf-jetbrains-mono-nerd ttf-jetbrains-mono ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono" "Installing Nerd Fonts and Symbols (Recommended)" "yes" 
+# Ghostty and Kitty Terminal Emulators (Ghostty is my default in hyprland.conf)
+run_command "pacman -S --noconfirm kitty ghostty" "Install Kitty & Ghostty - Terminal Emulators" "yes"
 
-# Brave Browser
+# Yazi - File Manager (Yazi is my default in hyprland.conf)
+run_command "pacman -S --noconfirm yazi-bin" "Install Yazi - Terminal File Manager" "yes"
+
+# Brave Browser (Brace is my default in hyprland.conf)
 run_command "yay -S --sudoloop --noconfirm brave-bin" "Install Brave Browser" "yes" "no"
 
 # Firefox Browser
 run_command "pacman -S --noconfirm firefox" "Install Firefox Browser" "yes"
 
-# Ghostty and Kitty Terminal Emulators
-run_command "pacman -S --noconfirm kitty ghostty" "Install Kitty & Ghostty - Terminal Emulators" "yes"
+# Obsidian Notes
+run_command "pacman -S --noconfirm obsidian" "Install Obsidian Notes" "yes"
+
+# Hyprpicker - Color Picker
+run_command "yay -S --sudoloop --noconfirm hyprpicker" "Install Hyprpicker - Color Picker" "yes" "no"
+
+# All the Nerd Fonts and Symbols.
+run_command "pacman -S --noconfirm ttf-cascadia-code-nerd ttf-cascadia-mono-nerd ttf-fira-code ttf-fira-mono ttf-fira-sans ttf-firacode-nerd ttf-iosevka-nerd ttf-iosevkaterm-nerd ttf-jetbrains-mono-nerd ttf-jetbrains-mono ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono" "Installing Nerd Fonts and Symbols (Recommended)" "yes" 
 
 # Impala - Wifi TUI
 run_command "pacman -S --noconfirm impala" "Install Impala for Wi-Fi networking" "yes"
@@ -54,12 +63,6 @@ run_command "pacman -S --noconfirm qt5-wayland qt6-wayland" "Install QT support 
 # Waybar - Status Bar
 run_command "pacman -S --noconfirm waybar" "Install Waybar - Status Bar" "yes"
 
-# Tofi - Application Launcher
-run_command "yay -S --sudoloop --noconfirm tofi" "Install Tofi - Application Launcher" "yes" "no"
-
-# Hyprpicker - Color Picker
-run_command "yay -S --sudoloop --noconfirm hyprpicker" "Install Hyprpicker - Color Picker" "yes" "no"
-
 # Hyprpaper - Wallpaper Management
 run_command "pacman -S --noconfirm hyprpaper" "Install Hyprpaper - Wallpaper Management" "yes"
 
@@ -71,8 +74,5 @@ run_command "yay -S --sudoloop --noconfirm wlogout" "Install Wlogout - Session M
 
 # Hypridle - Idle Management
 run_command "yay -S --sudoloop --noconfirm hypridle" "Install Hypridle for idle management" "yes" "no"
-
-# PCManFM - File Manager
-run_command "yay -S --sudoloop --noconfirm pcmanfm-gtk3" "Install PCManFM - File Manager" "yes" "no"
 
 echo "------------------------------------------------------------------------"
