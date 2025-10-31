@@ -10,6 +10,6 @@ log_message "Final setup script started"
 print_bold_blue "\nCongratulations! Your Simple Hyprland setup is complete!"
 echo "------------------------------------------------------------------------"
 
-print_success "\nEnjoy!"
+print_success "\nWelcome to the Defiant!"
 
 echo "------------------------------------------------------------------------"
