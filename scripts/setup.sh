@@ -19,11 +19,11 @@ run_command "pacman -S --noconfirm kitty ghostty" "Install Kitty & Ghostty - Ter
 # Yazi - File Manager (Yazi is my default in hyprland.conf)
 run_command "pacman -S --noconfirm yazi-bin" "Install Yazi - Terminal File Manager" "yes"
 
-# Brave Browser (Brace is my default in hyprland.conf)
+# Vivaldi Browser (Vivaldi is my default in hyprland.conf)
 run_command "yay -S --sudoloop --noconfirm brave-bin" "Install Brave Browser" "yes" "no"
 
-# Firefox Browser
-run_command "pacman -S --noconfirm firefox" "Install Firefox Browser" "yes"
+# Brave Browser
+run_command "pacman -S --noconfirm Brave" "Install Brave Browser" "yes"
 
 # Obsidian Notes
 run_command "pacman -S --noconfirm obsidian" "Install Obsidian Notes" "yes"
@@ -33,6 +33,9 @@ run_command "yay -S --sudoloop --noconfirm hyprpicker" "Install Hyprpicker - Col
 
 # All the Nerd Fonts and Symbols.
 run_command "pacman -S --noconfirm ttf-cascadia-code-nerd ttf-cascadia-mono-nerd ttf-fira-code ttf-fira-mono ttf-fira-sans ttf-firacode-nerd ttf-iosevka-nerd ttf-iosevkaterm-nerd ttf-jetbrains-mono-nerd ttf-jetbrains-mono ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono" "Installing Nerd Fonts and Symbols (Recommended)" "yes" 
+
+# Jome - Emoji Picker
+run_command "yay -S --sudoloop --noconfirm jome" "Install Jome - Emoji Picker" "yes" "no"
 
 # Impala - Wifi TUI
 run_command "pacman -S --noconfirm impala" "Install Impala for Wi-Fi networking" "yes"
@@ -46,10 +49,17 @@ run_command "pacman -S --noconfirm bluetui" "Install BlueTUI for Bluetooth contr
 # Jvol - Audio TUI
 run_command "yay -S --sudoloop --noconfirm jvol-git" "Install Jvol for audio controls" "yes" "no"
 
+# UFW - Uncomplicated Firewall
+run_command "pacman -S --noconfirm ufw" "Install UFW for Firewalling" "yes"
+
+# TUFW - Terminal Manager for Uncomplicated Firewall
+run_command "yay -S --sudoloop --noconfirm tufw-git" "Install TUFW for firewall managemnt" "yes" "no"
+
 #I want a TUI or sorts for brightness control....
 run_command "pacman -S --noconfirm brightnessctl" "Install brightnessctl for backlight control" "yes"
 
 #I want a TUI or sorts for system font control...
+#Font-Manager is all I have found thus far.
 
 # Hyprpolkit Agent
 run_command "pacman -S --noconfirm hyprpolkitagent" "Install Hypr Polkit Agent for authentication dialogs" "yes"

@@ -42,4 +42,9 @@ run_command "cp -r $BASE_DIR/configs/hypr/hypridle.conf /home/$SUDO_USER/.config
 # Wallpaper Images
 run_command "mkdir -p /home/$SUDO_USER/.config/assets/backgrounds && cp -r $BASE_DIR/assets/backgrounds /home/$SUDO_USER/.config/assets/" "Copy default backgrounds to assets directory" "yes" "no"
 
+# Setup Firewall
+
+# Setup DNS
+
+
 echo "------------------------------------------------------------------------"

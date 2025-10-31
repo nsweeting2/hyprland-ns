@@ -1,7 +1,7 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: JetBrainsMono Nerd Font, monospace;
+    font-family: FiraCode Nerd Font Mono;
     font-weight: bold;
     font-size: 14px;
     min-height: 0;
@@ -120,4 +120,11 @@ window#waybar {
     color:#a6adc8;
     border-radius: 0px 10px 10px 0px;
     margin-right: 10px;
+}
+
+#custom-update {
+    color: #a6adc8;
+    border-radius: 10px 10px 10px 10px;
+    margin-left: 5px;
+    border-right: 0px;
 }

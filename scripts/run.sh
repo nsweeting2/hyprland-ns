@@ -47,7 +47,7 @@ echo "------------------------------------------------------------------------"
 run_script "pre.sh" "Pre Setup"
 run_script "setup.sh" "Hyprland & Critical Softwares Setup"
 run_script "configure.sh" "Basic Utilities & Configs Setup"
-run_script "theme.sh" "Themes and Tools Setup"
+run_script "themeing.sh" "Themes and Tools Setup"
 run_script "final.sh" "Final Setup"
 
 log_message "Installation completed successfully"

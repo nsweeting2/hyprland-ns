@@ -1,0 +1,58 @@
+{
+    "reload_style_on_change": true,
+    "layer": "top",
+    "position": "top",
+    "output": "DP-2",
+    "mode": "dock",
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "height": 0,
+    "modules-left": [
+        "hyprland/workspaces"
+    ],
+    "modules-center": [],
+    "modules-right": [
+        "custom/update",
+        "clock"
+    ],
+    
+    "hyprland/workspaces": {
+        "on-click": "activate",
+        "format": "{icon}",
+        "format-icons": {
+            "default": "",
+            "6": "6",
+            "7": "7",
+            "8": "8",
+            "9": "9",
+            "10": "0",
+            "active": "󱓻"
+        },
+        "persistent-workspaces": {
+            "6": [],
+            "7": [],
+            "8": [],
+            "9": [],
+            "10": []
+        }
+    },
+
+    "clock": {
+        "format": "{:%A - %I:%M %p}",
+        "format-alt": "{:%B-%d-%Y}",
+        "tooltip": false,
+        "interval": 30
+    },
+
+    "custom/update": {
+        "format": "{text}",
+        "exec": "~/.config/waybar/scripts/check_for_updates.sh",
+        "on-click": "~/.config/waybar/scripts/run_updates.sh",
+        "interval": 10800,
+        "tooltip": "{tooltip}",
+        "hide-empty-text": true,
+        "return-type": "json",
+        "signal": 1        
+    }
+}
