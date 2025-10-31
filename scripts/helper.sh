@@ -97,7 +97,7 @@ function run_command {
     # in AUTO_MODE, run it as the original user with a temporary sudoers
     # entry that allows pacman/makepkg (and yay) without a password. This
     # avoids interactive sudo password prompts from AUR helpers.
-    if [[ "${AUTO_MODE,,}" == "yes" ]] && ([[ "$cmd" == *"yay"* || "$cmd" == *"paru"* ]]); then
+    if ([[ "$cmd" == *"yay"* || "$cmd" == *"paru"* ]]); then
         # Use the helper to run the command as the user with temporary NOPASSWD
         log_message "Auto mode: running AUR helper command via temporary NOPASSWD sudoers: $cmd"
         run_with_temp_nopass_as_user "$cmd"
